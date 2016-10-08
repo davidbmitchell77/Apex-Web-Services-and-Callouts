@@ -1,0 +1,28 @@
+<apex:page controller="AwesomeAsyncCalculator" sidebar="false" showHeader="false" doctype="html-5.0" title="Awesome Calculator (Async)">
+  <apex:sectionHeader title="Asynchronous Calculator Web Service (SOAP)" />
+  <apex:form >
+     <apex:pageMessages />
+     <apex:pageBlock title="Simple Addition">
+        <apex:outputLabel value="x: "/>
+        <apex:inputText value="{!x}" style="text-align:right;" required="true"/>
+        <apex:outputLabel value=" + y: "/>
+        <apex:inputText value="{!y}" style="text-align:right;" required="true"/>
+        <apex:commandButton action="{!startRequest}" value="Calculate" reRender="response" status="requestStatus"/>
+        <apex:commandButton action="{!clear}" value="Clear"/>
+        <apex:actionStatus id="requestStatus">
+          <apex:facet name="start">
+            <apex:outputPanel >
+              <img src="/img/loading32.gif" height="16" width="18" alt="" />
+              <apex:outputLabel value="Waiting for callout response..." />
+            </apex:outputPanel>
+          </apex:facet>
+        </apex:actionStatus>
+    </apex:pageBlock>
+  </apex:form>
+  <apex:outputPanel id="response">
+    <apex:outputLabel value="Total: " style="font-weight:bold" rendered="{!NOT(response == null)}"/>
+    <apex:outputText value="{0, number, #,###,##0.00}" style="font-weight:bold">
+      <apex:param value="{!response}" />
+    </apex:outputText>
+  </apex:outputPanel>
+</apex:page>
