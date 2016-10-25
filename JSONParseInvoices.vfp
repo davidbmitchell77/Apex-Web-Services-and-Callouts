@@ -1,0 +1,47 @@
+<apex:page controller="JSONParseInvoicesController" tabStyle="Account" action="{!parseJSONString}">
+  <apex:form id="theForm">
+    <apex:pageMessages />
+    <apex:pageBlock title="Deserialize JSON Invoice List: {!endpoint}">
+      <!-- apex:commandButton action="{!parseJSONString}" value="Deserialize"/ -->
+      <apex:repeat value="{!wrapper.invoiceList}" var="inv">
+          <apex:pageBlockSection columns="2" collapsible="true">
+            <apex:facet name="header">Invoice:  {!inv.invoiceNumber}</apex:facet>
+            <apex:pageBlockSectionItem >
+              <apex:outputLabel value="Date:" for="statementDate" />
+              <apex:outputText value="{0, date, MM'/'dd'/'YYYY}" id="statementDate">
+                <apex:param value="{!inv.statementDate}" />
+              </apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+              <apex:outputLabel value="Total:" for="totalPrice" />
+              <apex:outputText value="{0, number, $#,###,##0.00}" id="totalPrice">
+                <apex:param value="{!inv.totalPrice}" />
+              </apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+              <apex:pageBlockTable value="{!inv.lineItems}" var="li" id="lineItems" >
+                <apex:column value="{!li.productName}" headerValue="Product Name" width="350"/>
+                <apex:column value="{!li.quantity}" headerValue="Quantity"/>
+                <apex:column >
+                  <apex:facet name="header">
+                    <apex:outputText value="Unit Price"/>
+                  </apex:facet>
+                  <apex:outputText value="{0, number, $#,###,##0.00}">
+                    <apex:param value="{!li.unitPrice}"/>
+                  </apex:outputText>
+                </apex:column>
+                <apex:column >
+                  <apex:facet name="header">
+                    <apex:outputText value="Extended Price"/>
+                  </apex:facet>
+                  <apex:outputText value="{0, number, $#,###,##0.00}">
+                    <apex:param value="{!li.unitPrice * li.quantity}"/>
+                  </apex:outputText>
+                </apex:column>
+              </apex:pageBlockTable>
+            </apex:pageBlockSectionItem>
+          </apex:pageBlockSection>
+      </apex:repeat>
+    </apex:pageBlock>
+  </apex:form>
+</apex:page>
