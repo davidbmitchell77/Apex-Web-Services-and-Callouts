@@ -25,7 +25,7 @@ HttpResponse response = http.send(request);
 Integer responseCode = response.getStatusCode();
 System.debug(responseCode + ': ' + responses.get(responseCode));
 if (responses.get(response.getStatusCode()) == 'OK') {
-    Map<String, Object> restResponse= (Map<String, Object>)JSON.deserializeUntyped(response.getBody());
+    Map<String, Object> restResponse = (Map<String, Object>)JSON.deserializeUntyped(response.getBody());
     List<Object> animalList = restResponse.values();
     for (Object a : animalList) {
       System.debug(a);

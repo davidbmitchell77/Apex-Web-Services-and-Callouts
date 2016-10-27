@@ -18,6 +18,9 @@ public class JSONInvoiceWrapper {
         public Double unitPrice {get; set;}
         public Double quantity {get; set;}
         public String productName {get; set;}
+        public Double getExtendedPrice() {
+        	return (unitPrice * quantity);
+        }
     }
 
     public List<Invoice> invoiceList {get; set;}
