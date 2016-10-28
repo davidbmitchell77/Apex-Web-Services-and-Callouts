@@ -21,6 +21,12 @@ public class JSONInvoiceWrapper {
         public Double getExtendedPrice() {
         	return (unitPrice * quantity);
         }
+
+        public LineItem(Double up, Double q, String pn) {
+            unitPrice = up;
+            quantity = q;
+            productName = pn;
+        }
     }
 
     public List<Invoice> invoiceList {get; set;}
