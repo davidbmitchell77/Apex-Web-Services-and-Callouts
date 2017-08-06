@@ -5,13 +5,13 @@
       <apex:panelGrid columns="2">
         <apex:commandButton action="{!submitRequest}" value="Submit Request" reRender="response" status="requestStatus"/>
         <apex:actionStatus id="requestStatus">
-        <apex:facet name="start">
-          <apex:outputPanel>
-            <img src="/img/loading32.gif" height="16" width="18" alt="" />
-            <apex:outputLabel value="Waiting for HTTP callout response..." />
-          </apex:outputPanel>
-        </apex:facet>
-      </apex:actionStatus>
+            <apex:facet name="start">
+              <apex:outputPanel>
+                <img src="/img/loading32.gif" height="16" width="18" alt="" />
+                <apex:outputLabel value="Waiting for HTTP callout response..." />
+              </apex:outputPanel>
+          </apex:facet>
+        </apex:actionStatus>
       </apex:panelGrid>
       <br/>
       <apex:outputPanel id="response" >
